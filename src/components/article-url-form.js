@@ -36,7 +36,9 @@ export default function ArticleUrlForm({
           value={voiceId}
         >
           {voicesIds.map((id) => (
-            <option key={id} value={id}>{id}</option>
+            <option key={id} value={id}>
+              {id}
+            </option>
           ))}
         </Input>
       </FormGroup>

@@ -1,6 +1,5 @@
-// import createS3FriendlyFilename from "lib/back-end/create-s3-friendly-name";
 import parseWebsite from "lib/back-end/parse-website";
-import startPollyTask from "lib/back-end/start-polly-task";
+import getAudio from "lib/back-end/get-audio";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,8 +11,7 @@ export default async function handler(req, res) {
     const { articleUrl, voiceId = process.env.AWS_POLLY_VOICE_ID_DEFAULT } =
       req.body;
     const article = await parseWebsite({ url: articleUrl });
-    // const audioTaskId = await startPollyTask({ article, voiceId });
-    const audioUrl = await startPollyTask({ article, voiceId });
+    const audioUrl = await getAudio({ article, voiceId });
 
     res.json({ article, audioUrl });
   } catch (err) {
