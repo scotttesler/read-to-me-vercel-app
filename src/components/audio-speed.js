@@ -2,10 +2,10 @@ import InputRange from "react-input-range";
 
 export default function AudioSpeed({
   onChange = () => {},
-  value = 1,
-  max = 3,
-  min = 0,
+  max = 2.9,
+  min = 0.1,
   step = 0.1,
+  value = 1,
 }) {
   return (
     <div className="component">

@@ -11,6 +11,7 @@
     "@aws-sdk/client-cognito-identity": "^3.17.0",
     "@aws-sdk/client-polly": "^3.17.0",
     "@aws-sdk/credential-provider-cognito-identity": "^3.17.0",
+    "@aws-sdk/polly-request-presigner": "^3.17.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",

@@ -13,19 +13,15 @@ export default async function fetchAudio({
       method: "POST",
     };
 
-    // const resArticle = await fetch("/api/parse-website", httpOptions);
-    // if (!resArticle.ok) throw new Error("Error parsing website.");
-    // const article = await resArticle.json();
-
     const resAudio = await fetch("/api/website-to-audio", httpOptions);
     if (!resAudio.ok) throw new Error("Error converting website to audio.");
-    const { audio, article } = await resAudio.json();
+    const { article, audioUrl } = await resAudio.json();
 
     dispatch({
       payload: {
         article,
-        audioUrl: audio.url,
         articleUrl: article.canonicalLink,
+        audioUrl,
       },
       type: DISPATCHES.AUDIO_FETCHED,
     });

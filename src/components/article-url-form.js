@@ -7,6 +7,7 @@ export default function ArticleUrlForm({
   onVoiceIdChange = () => {},
   submitButtonText = "",
   voiceId = "",
+  voicesIds = ["Matthew"],
 }) {
   return (
     <Form onSubmit={onSubmit}>
@@ -34,19 +35,9 @@ export default function ArticleUrlForm({
           type="select"
           value={voiceId}
         >
-          <option value="Matthew">Man (American)</option>
-          <option value="Brian">Man (English)</option>
-          <option value="Russell">Man (Australian)</option>
-          <option value="Geraint">Man (Welsh)</option>
-          <option disabled>──────────</option>
-          <option value="Salli">Woman (American)</option>
-          <option value="Amy">Woman (English)</option>
-          <option value="Olivia">Woman (Australian)</option>
-          <option value="Raveena">Woman 1 (Indian)</option>
-          <option value="Aditi">Woman 2 (Indian)</option>
-          <option disabled>──────────</option>
-          <option value="Justin">Boy (American)</option>
-          <option value="Ivy">Young Girl (American)</option>
+          {voicesIds.map((id) => (
+            <option key={id} value={id}>{id}</option>
+          ))}
         </Input>
       </FormGroup>
 

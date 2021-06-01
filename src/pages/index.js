@@ -6,15 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _isEmpty from "lodash/isEmpty";
 import _omit from "lodash/omit";
 import fetchAudio from "lib/front-end/fetch-audio";
+import getAvailableVoices from "lib/back-end/get-available-voices";
 import parseQueryString from "lib/front-end/parse-query-string";
-import useIndexReducer, { DISPATCHES, INIT_STATE } from "lib/front-end/use-index-reducer";
+import useIndexReducer, {
+  DISPATCHES,
+  INIT_STATE,
+} from "lib/front-end/use-index-reducer";
 import Article from "components/article";
 import ArticleUrlForm from "components/article-url-form";
 import Audio from "components/audio";
 import Error from "components/error";
 import Footer from "components/footer";
 
-export default function Index() {
+export default function Index({ voicesIds = ["Matthew"] }) {
   const router = useRouter();
   const [
     {
@@ -100,6 +104,7 @@ export default function Index() {
             isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : "Submit"
           }
           voiceId={voiceId}
+          voicesIds={voicesIds}
         />
       </Container>
 
@@ -118,4 +123,8 @@ export default function Index() {
       <Footer />
     </>
   );
+}
+
+export async function getStaticProps() {
+  return { props: { voicesIds: await getAvailableVoices() } };
 }

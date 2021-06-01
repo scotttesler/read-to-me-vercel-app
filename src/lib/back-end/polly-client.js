@@ -8,6 +8,7 @@ import { Polly } from "@aws-sdk/client-polly";
 //     IdentityPoolId: 'us-east-1:21cf1161-7c56-401d-97e0-8a43e351d3fb',
 // });
 
+// Documentation for Polly: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-polly/classes/polly.html
 export default new Polly({
   credentials: {
     accessKeyId: process.env.AWS_IAM_ACCESS_KEY_ID,

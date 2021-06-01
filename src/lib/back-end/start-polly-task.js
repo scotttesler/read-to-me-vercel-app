@@ -1,15 +1,17 @@
 // import createS3FriendlyFilename from "lib/back-end/create-s3-friendly-name";
 import pollyClient from "lib/back-end/polly-client";
+import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
 import { StartSpeechSynthesisTaskCommand } from "@aws-sdk/client-polly";
 
+// Documentation for "getSynthesizeSpeechUrl": https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_polly_request_presigner.html#getsynthesizespeechurl-1
 export default async function startPollyTask({
   article,
   voiceId = process.env.AWS_POLLY_VOICE_ID_DEFAULT,
 }) {
-  const s3Params = {
+  const synthesizeSpeechParams = {
     Engine: "neural",
     OutputFormat: "mp3",
-    OutputS3BucketName: process.env.AWS_S3_BUCKET_NAME_AUDIO,
+    // OutputS3BucketName: process.env.AWS_S3_BUCKET_NAME_AUDIO,
     // SampleRate: "22050",
     // Text: "article title",
     Text: `${article.title}. ${article.text}`,
@@ -17,11 +19,19 @@ export default async function startPollyTask({
     VoiceId: voiceId,
   };
 
-  const task = await pollyClient.send(
-    new StartSpeechSynthesisTaskCommand(s3Params)
-  );
+  // const task = await pollyClient.send(
+  //   new StartSpeechSynthesisTaskCommand(synthesizeSpeechParams)
+  // );
 
-  return task.TaskId;
+  // return task.TaskId;
+
+  const url = await getSynthesizeSpeechUrl({
+    client: pollyClient,
+    options: { expiresIn: 600 },
+    params: synthesizeSpeechParams,
+  });
+
+  return url;
 }
 
 // Example task

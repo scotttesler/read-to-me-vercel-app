@@ -12,9 +12,10 @@ export default async function handler(req, res) {
     const { articleUrl, voiceId = process.env.AWS_POLLY_VOICE_ID_DEFAULT } =
       req.body;
     const article = await parseWebsite({ url: articleUrl });
-    const audioTaskId = await startPollyTask({ article, voiceId });
+    // const audioTaskId = await startPollyTask({ article, voiceId });
+    const audioUrl = await startPollyTask({ article, voiceId });
 
-    res.json({ article, audio });
+    res.json({ article, audioUrl });
   } catch (err) {
     console.error(err);
     res.status(400).json({});
