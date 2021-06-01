@@ -1,4 +1,3 @@
-import _isEmpty from "lodash/isEmpty";
 import queryString from "query-string";
 
 export default function parseQueryString() {

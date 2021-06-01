@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import parseQueryString from "lib/parse-query-string";
+import parseQueryString from "lib/front-end/parse-query-string";
 
 const DEFAULT_ERROR_MESSAGE = "The article could not be parsed.";
 
@@ -15,7 +15,6 @@ export const DISPATCHES = {
 
 export const INIT_STATE = {
   article: {},
-  articleTitle: "",
   articleUrl: "",
   audioSpeed: 1,
   audioUrl: "",
@@ -53,7 +52,6 @@ function reducer(state = {}, action = {}) {
     case DISPATCHES.SUBMIT:
       return {
         ...state,
-        articleTitle: INIT_STATE.articleTitle,
         audioUrl: INIT_STATE.audioUrl,
         errorMessage: INIT_STATE.errorMessage,
         isLoading: true,
@@ -63,4 +61,6 @@ function reducer(state = {}, action = {}) {
   }
 }
 
-export default () => useReducer(reducer, INIT_STATE, init);
+export default function useIndexReducer() {
+  return useReducer(reducer, INIT_STATE, init);
+}

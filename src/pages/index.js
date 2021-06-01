@@ -1,13 +1,13 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Container } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _isEmpty from "lodash/isEmpty";
 import _omit from "lodash/omit";
-import fetchAudio from "lib/fetch-audio";
-import parseQueryString from "lib/parse-query-string";
-import useIndexReducer, { DISPATCHES, INIT_STATE } from "lib/use-index-reducer";
+import fetchAudio from "lib/front-end/fetch-audio";
+import parseQueryString from "lib/front-end/parse-query-string";
+import useIndexReducer, { DISPATCHES, INIT_STATE } from "lib/front-end/use-index-reducer";
 import Article from "components/article";
 import ArticleUrlForm from "components/article-url-form";
 import Audio from "components/audio";
@@ -19,7 +19,6 @@ export default function Index() {
   const [
     {
       article,
-      articleTitle,
       articleUrl,
       audioSpeed,
       audioUrl,

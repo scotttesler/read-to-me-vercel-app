@@ -1,10 +1,17 @@
-export default function parseWebsite(req, res) {
+import parseWebsite from "lib/back-end/parse-website";
+
+export default async function handler(req, res) {
   if (req.method !== "POST") {
-    res.status(404);
+    res.status(404).json({});
     return;
   }
 
-  const { articleUrl } = req.body;
-  console.log({ articleUrl, body: req.body });
-  res.status(200).json({ name: "John Doe" });
+  try {
+    const { articleUrl } = req.body;
+    const website = await parseWebsite({ url: articleUrl });
+    res.json(website);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({});
+  }
 }

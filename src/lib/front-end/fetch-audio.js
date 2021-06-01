@@ -1,4 +1,4 @@
-import { DISPATCHES } from "lib/use-index-reducer";
+import { DISPATCHES } from "lib/front-end/use-index-reducer";
 import fetch from "isomorphic-unfetch";
 
 export default async function fetchAudio({
@@ -13,13 +13,13 @@ export default async function fetchAudio({
       method: "POST",
     };
 
-    const resArticle = await fetch("/api/parse-website", httpOptions);
-    if (!resArticle.ok) throw new Error("Error parsing website.");
-    const article = await resArticle.json();
+    // const resArticle = await fetch("/api/parse-website", httpOptions);
+    // if (!resArticle.ok) throw new Error("Error parsing website.");
+    // const article = await resArticle.json();
 
     const resAudio = await fetch("/api/website-to-audio", httpOptions);
     if (!resAudio.ok) throw new Error("Error converting website to audio.");
-    const audio = await resAudio.json();
+    const { audio, article } = await resAudio.json();
 
     dispatch({
       payload: {
