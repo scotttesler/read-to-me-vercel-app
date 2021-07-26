@@ -1,9 +1,10 @@
 import { Container } from "reactstrap";
 import _isEmpty from "lodash/isEmpty";
+import Image from "next/image";
 
 export default function Article({ article = {} }) {
   const articleImage = _isEmpty(article?.image ?? "") ? null : (
-    <img alt="Article image" src={article.image} style={{ width: "100%" }} />
+    <Image alt="Article image" src={article.image} style={{ width: "100%" }} />
   );
 
   const publisher = article?.publisher ?? "";
